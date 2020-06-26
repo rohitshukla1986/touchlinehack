@@ -157,9 +157,9 @@ function App() {
                 <Button
                   className={classes.playerButton}
                   variant="contained" color="secondary"
-                        onClick={() => handleGoalScorerChange("Michael Mccourt")}
+                        onClick={() => handleGoalScorerChange("Caelan Mccourt")}
                 >
-                  Michael Mccourt >
+                  Caelan Mccourt >
                 </Button>
 
               </div>
@@ -167,7 +167,7 @@ function App() {
 
             <div  className="canvas-container">
               <div id="my-node" className="canvas-background"></div>
-              <div className={goalScorer === "Michael Mccourt" ? "canvas-middle-D" : goalScorer === "Michael Beckham" ? "canvas-middle-A" : goalScorer === "Lionel Ronaldo" ? "canvas-middle-B" : "canvas-middle-empty"}></div>
+              <div className={goalScorer === "Caelan Mccourt" ? "canvas-middle-D" : goalScorer === "Michael Beckham" ? "canvas-middle-A" : goalScorer === "Lionel Ronaldo" ? "canvas-middle-B" : "canvas-middle-empty"}></div>
               <div className="canvas-foreground"></div>
             </div>
 
@@ -203,7 +203,7 @@ function App() {
               return (
                 <div className={"scorer"}>
                   <div className={"scorer-image"}></div>
-                  <p>{player === "Michael Mccourt" ? "7" : player === "Michael Beckham" ? "13" : player === "Lionel Ronaldo" ? "20" : ""} {player} {scoreTimes[i]}"</p>
+                  <p>{player === "Caelan Mccourt" ? "7" : player === "Michael Beckham" ? "13" : player === "Lionel Ronaldo" ? "20" : ""} {player} {scoreTimes[i]}"</p>
                   <p>{comments[i]}</p>
                 </div>
               )
