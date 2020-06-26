@@ -41,6 +41,11 @@ function App() {
       },
       textField: {
         width: "90%"
+      },
+      playerButton: {
+        width: "100%",
+        marginTop: "5px",
+        marginBottom: "5px"
       }
     })
   );
@@ -67,7 +72,7 @@ function App() {
   }
 
   function handleGoalScorerChange(evt: any) {
-    setGoalScorer(evt.target.value)
+    setGoalScorer(evt)
   }
 
   function handleComments(evt: any) {
@@ -94,7 +99,70 @@ function App() {
         <p>Match Centre</p>
       </div>
 
-      { toggleTimeLine ?
+      {
+        goalButtonClicked ?
+          <div className="goal-template-container">
+            <div className="goal-scorer-dropdown-container">
+
+              <div className='dropdown-container'>
+                <p className="goal-scorer-header">Goal Scorer</p>
+
+                <Button
+                  className={classes.playerButton}
+                  variant="contained" color="secondary"
+                        onClick={() => handleGoalScorerChange("Michael Beckham")}
+                >
+                  Michael Beckham >
+                </Button>
+                <Button
+                  className={classes.playerButton}
+                  variant="contained" color="secondary"
+                        onClick={() => handleGoalScorerChange("Lionel Ronaldo")}
+                >
+                  Lionel Ronaldo >
+                </Button>
+                <Button
+                  className={classes.playerButton}
+                  variant="contained" color="secondary"
+                        onClick={() => handleGoalScorerChange("Michael Mccourt")}
+                >
+                  Michael Mccourt >
+                </Button>
+
+              </div>
+            </div>
+
+            <div  className="canvas-container">
+              <div id="my-node" className="canvas-background"></div>
+              <div className={goalScorer === "Michael Mccourt" ? "canvas-middle-D" : goalScorer === "Michael Beckham" ? "canvas-middle-A" : goalScorer === "Lionel Ronaldo" ? "canvas-middle-B" : "canvas-middle-empty"}></div>
+              <div className="canvas-foreground"></div>
+            </div>
+
+            {goalScorer !== "" ?
+              <div className={"textField-container"}>
+                <TextField
+                  className={classes.textField}
+                  id="outlined-multiline-static"
+                  label="Comments"
+                  multiline
+                  rows={4}
+                  variant="outlined"
+                  onChange={handleComments}
+                />
+              </div> : <></>
+            }
+
+            { goalScorer !== "" ?
+              <div className="confirm-button-container">
+                <Button variant="contained" color="primary"
+                        onClick={handleConfirmGoal}
+                >
+                  Confirm Goal
+                </Button>
+              </div>: <></>
+            }
+          </div> :
+        toggleTimeLine ?
         <>
         <div className="scorer-container">
           {
@@ -195,57 +263,6 @@ function App() {
           </div>
         </>
       }
-
-      {goalButtonClicked ?
-        <div className="goal-template-container">
-          <div className="goal-scorer-dropdown-container">
-
-            <div className='dropdown-container'>
-              <p className="goal-scorer-header">Goal Scorer</p>
-              <FormControl variant="outlined" className={classes.formControl}>
-                <Select className={classes.dropDownField}
-                        value={goalScorer}
-                        onChange={(evt: any) => handleGoalScorerChange(evt)}
-                >
-                  <MenuItem className={classes.dropDownField} value={''}></MenuItem>
-                  <MenuItem className={classes.dropDownField} value={'Michael Beckham'}>Michael Beckham</MenuItem>
-                  <MenuItem className={classes.dropDownField} value={'Lionel Ronaldo'}>Lionel Ronaldo</MenuItem>
-                  <MenuItem className={classes.dropDownField} value={'Michael Mccourt'}>Michael Mccourt</MenuItem>
-                </Select>
-              </FormControl>
-            </div>
-          </div>
-
-          <div  className="canvas-container">
-            <div id="my-node" className="canvas-background"></div>
-            <div className={goalScorer === "Michael Mccourt" ? "canvas-middle-D" : goalScorer === "Michael Beckham" ? "canvas-middle-A" : goalScorer === "Lionel Ronaldo" ? "canvas-middle-B" : "canvas-middle-empty"}></div>
-            <div className="canvas-foreground"></div>
-          </div>
-
-          {goalScorer !== "" ?
-            <div className={"textField-container"}>
-              <TextField
-                className={classes.textField}
-                id="outlined-multiline-static"
-                label="Comments"
-                multiline
-                rows={4}
-                variant="outlined"
-                onChange={handleComments}
-              />
-            </div> : <></>
-          }
-
-          { goalScorer !== "" ?
-            <div className="confirm-button-container">
-              <Button variant="contained" color="primary"
-                      onClick={handleConfirmGoal}
-              >
-                Confirm Goal
-              </Button>
-            </div>: <></>
-          }
-        </div> : <></>}
     </div>
   );
 }
