@@ -55,6 +55,7 @@ function App() {
   const [scoreTime, setScoreTime] = React.useState<string>("");
   const [score, setScore] = React.useState(0);
   const [image, setImage] = React.useState({});
+  const [toggleTimeLine, setToggleTimeLine] = React.useState(false);
 
   useEffect(() => {
     const date = new Date(scoreMilliseconds);
@@ -89,87 +90,111 @@ function App() {
   return (
 
     <div className="main-container">
-      <div className="versus-container">
-        <div className="team-name-container">
-          <StarsIcon className="versus-icon"></StarsIcon>
-          <p>Madrid Utd</p>
-        </div>
-        <p><b>VS</b></p>
-        <div className="team-name-container">
-          <p>Liverpool City</p>
-          <SecurityIcon className="versus-icon"></SecurityIcon>
-        </div>
-        <div className="versus-teamAway"></div>
+      <div className="top-bar">
+        <p>Match Centre</p>
       </div>
 
-      <div className="score-widget-container">
-        <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'/>
-        <div className="timer-container">
-          <Timer
-            initialTime={0}
-          >
-            {({ start, resume, pause, stop, reset, getTime }) => (
-              <React.Fragment>
-                <div className="timer-digits">
-                  <Timer.Minutes /> : <Timer.Seconds />
-                </div>
-                <br />
-                <div>
-                  <button className="timer-button" onClick={start}>Start</button>
-                  <button className="timer-button" onClick={stop}>Stop</button>
-                  <button className="timer-button" onClick={reset}>Reset</button>
-                </div>
-                {
-                  goalButtonClicked ? setScoreMilliseconds(getTime()) : null
-                }
-              </React.Fragment>
-            )}
-          </Timer>
-        </div>
-
-        <div className="score-main-container">
-          <div className="score-item-container">
-            <p className="score-text">Home</p>
-            <div className="score-container">{score}</div>
-          </div>
-          <div className="score-item-container">
-            <p className="score-text">Away</p>
-            <div className="score-container">0</div>
-          </div>
-        </div>
+      { toggleTimeLine ?
+        <>
         <div className="scorer-container">
           {
             scorers && scorers.map((player: string, i: number) => {
-              return(
+              return (
                 <div className={"scorer"}>
-                  <p>{player === "Michael Beckham" ? "13" : player === "Lionel Ronaldo" ? "20" : ""} {player} {scoreTimes[i]}"</p>
+                  <div className={"scorer-image"}></div>
+                  <p>{player === "Michael Mccourt" ? "7" : player === "Michael Beckham" ? "13" : player === "Lionel Ronaldo" ? "20" : ""} {player} {scoreTimes[i]}"</p>
+                  <p>{comments[i]}</p>
                 </div>
               )
             })
           }
         </div>
-      </div>
+        <Button variant="contained" color="secondary"
+        onClick={() => setToggleTimeLine(!toggleTimeLine)}
+        >
+        Back
+        </Button>
+        </>
 
-      <div className="action-container">
-        <Button className={classes.actionButton} onClick={handleGoalButtonClick} variant="contained">
-          <div className="button-container">
-            <p className="button-header">Goal</p>
-            <SportsSoccerIcon className="action-icon"></SportsSoccerIcon>
+        :  <>
+          <div className="versus-container">
+            <div className="team-name-container">
+              <StarsIcon className="versus-icon"></StarsIcon>
+              <p>Madrid Utd</p>
+            </div>
+            <p><b>VS</b></p>
+            <div className="team-name-container">
+              <p>Liverpool City</p>
+              <SecurityIcon className="versus-icon"></SecurityIcon>
+            </div>
+            <div className="versus-teamAway"></div>
           </div>
-        </Button>
-        <Button className={classes.actionButton} variant="contained">
-          <div className="button-container">
-            <p className="button-header">Change</p>
-            <TransferWithinAStationIcon className="action-icon"></TransferWithinAStationIcon>
+
+          <div className="score-widget-container">
+            <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'/>
+            <div className="timer-container">
+              <Timer
+                initialTime={0}
+              >
+                {({ start, resume, pause, stop, reset, getTime }) => (
+                  <React.Fragment>
+                    <div className="timer-digits">
+                      <Timer.Minutes /> : <Timer.Seconds />
+                    </div>
+                    <br />
+                    <div>
+                      <button className="timer-button" onClick={start}>Start</button>
+                      <button className="timer-button" onClick={stop}>Stop</button>
+                      <button className="timer-button" onClick={reset}>Reset</button>
+                    </div>
+                    {
+                      goalButtonClicked ? setScoreMilliseconds(getTime()) : null
+                    }
+                  </React.Fragment>
+                )}
+              </Timer>
+            </div>
+
+            <Button variant="contained" color="secondary"
+                    onClick={() => setToggleTimeLine(!toggleTimeLine)}
+            >
+              TimeLine
+            </Button>
+
+            <div className="score-main-container">
+              <div className="score-item-container">
+                <p className="score-text">Home</p>
+                <div className="score-container">{score}</div>
+              </div>
+              <div className="score-item-container">
+                <p className="score-text">Away</p>
+                <div className="score-container">0</div>
+              </div>
+            </div>
           </div>
-        </Button>
-        <Button className={classes.actionButton} variant="contained">
-          <div className="button-container">
-            <p className="button-header">Foul</p>
-            <CancelIcon className="action-icon"></CancelIcon>
+
+          <div className="action-container">
+            <Button className={classes.actionButton} onClick={handleGoalButtonClick} variant="contained">
+              <div className="button-container">
+                <p className="button-header">Goal</p>
+                <SportsSoccerIcon className="action-icon"></SportsSoccerIcon>
+              </div>
+            </Button>
+            <Button className={classes.actionButton} variant="contained">
+              <div className="button-container">
+                <p className="button-header">Change</p>
+                <TransferWithinAStationIcon className="action-icon"></TransferWithinAStationIcon>
+              </div>
+            </Button>
+            <Button className={classes.actionButton} variant="contained">
+              <div className="button-container">
+                <p className="button-header">Foul</p>
+                <CancelIcon className="action-icon"></CancelIcon>
+              </div>
+            </Button>
           </div>
-        </Button>
-      </div>
+        </>
+      }
 
       {goalButtonClicked ?
         <div className="goal-template-container">
@@ -185,6 +210,7 @@ function App() {
                   <MenuItem className={classes.dropDownField} value={''}></MenuItem>
                   <MenuItem className={classes.dropDownField} value={'Michael Beckham'}>Michael Beckham</MenuItem>
                   <MenuItem className={classes.dropDownField} value={'Lionel Ronaldo'}>Lionel Ronaldo</MenuItem>
+                  <MenuItem className={classes.dropDownField} value={'Michael Mccourt'}>Michael Mccourt</MenuItem>
                 </Select>
               </FormControl>
             </div>
@@ -192,7 +218,7 @@ function App() {
 
           <div  className="canvas-container">
             <div id="my-node" className="canvas-background"></div>
-            <div className={goalScorer === "Michael Beckham" ? "canvas-middle-A" : goalScorer === "Lionel Ronaldo" ? "canvas-middle-B" : "canvas-middle-empty"}></div>
+            <div className={goalScorer === "Michael Mccourt" ? "canvas-middle-D" : goalScorer === "Michael Beckham" ? "canvas-middle-A" : goalScorer === "Lionel Ronaldo" ? "canvas-middle-B" : "canvas-middle-empty"}></div>
             <div className="canvas-foreground"></div>
           </div>
 
