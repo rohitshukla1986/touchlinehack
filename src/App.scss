@@ -108,7 +108,7 @@
 }
 
 .canvas-container {
-  height: 300px;
+  height: 200px;
   width: 100%;
   position: relative;
   top: 0;
@@ -150,6 +150,17 @@
   background-size: contain;
 }
 
+.canvas-middle-D {
+  height: 70%;
+  width: 70%;
+  position: absolute;
+  bottom: 0;
+  left: 20px;
+  background-image: url("./img/middleimageC.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
 .canvas-middle-empty {
   height: 70%;
   width: 70%;
@@ -162,7 +173,6 @@
 }
 
 .canvas-foreground {
-  background-image: url("./img/foregroundimage.png");
   height: 30%;
   width: 30%;
   position: absolute;
@@ -173,7 +183,7 @@
 }
 
 .scorer-image {
-  height: 100px;
+  height: 200px;
   width: 100%;
   margin-top: 10px;
   margin-bottom: 10px;

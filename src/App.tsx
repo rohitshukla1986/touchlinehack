@@ -46,6 +46,9 @@ function App() {
         width: "100%",
         marginTop: "5px",
         marginBottom: "5px"
+      },
+      timeLineButton: {
+        marginTop: "10px"
       }
     })
   );
@@ -98,6 +101,36 @@ function App() {
       <div className="top-bar">
         <p>Match Centre</p>
       </div>
+
+      <div className="timer-container">
+        <Timer
+          initialTime={0}
+        >
+          {({ start, resume, pause, stop, reset, getTime }) => (
+            <React.Fragment>
+              <div className="timer-digits">
+                <Timer.Minutes/> : <Timer.Seconds/>
+              </div>
+              <br/>
+              <div>
+                <button className="timer-button"
+                        onClick={start}>Start
+                </button>
+                <button className="timer-button"
+                        onClick={stop}>Stop
+                </button>
+                <button className="timer-button"
+                        onClick={reset}>Reset
+                </button>
+              </div>
+              {
+                goalButtonClicked ? setScoreMilliseconds(getTime()) : null
+              }
+            </React.Fragment>
+          )}
+        </Timer>
+      </div>
+
 
       {
         goalButtonClicked ?
@@ -200,30 +233,8 @@ function App() {
 
           <div className="score-widget-container">
             <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'/>
-            <div className="timer-container">
-              <Timer
-                initialTime={0}
-              >
-                {({ start, resume, pause, stop, reset, getTime }) => (
-                  <React.Fragment>
-                    <div className="timer-digits">
-                      <Timer.Minutes /> : <Timer.Seconds />
-                    </div>
-                    <br />
-                    <div>
-                      <button className="timer-button" onClick={start}>Start</button>
-                      <button className="timer-button" onClick={stop}>Stop</button>
-                      <button className="timer-button" onClick={reset}>Reset</button>
-                    </div>
-                    {
-                      goalButtonClicked ? setScoreMilliseconds(getTime()) : null
-                    }
-                  </React.Fragment>
-                )}
-              </Timer>
-            </div>
 
-            <Button variant="contained" color="secondary"
+            <Button className={classes.timeLineButton} variant="contained" color="secondary"
                     onClick={() => setToggleTimeLine(!toggleTimeLine)}
             >
               TimeLine
